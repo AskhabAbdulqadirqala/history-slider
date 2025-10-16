@@ -1,14 +1,17 @@
-import React from "react";
-import styled from "styled-components";
+import React from 'react';
+import styled from 'styled-components';
+import { GlobalStyles } from './styles/GlobalStyles';
 
 const Title = styled.h1`
-  color: red;
   text-align: center;
   margin-top: 50px;
 `;
 
 const App: React.FC = () => {
-  return <Title>Hello world</Title>;
+  return (<>
+    <GlobalStyles />
+    <Title>Hello world</Title>
+  </>);
 };
 
 export default App;

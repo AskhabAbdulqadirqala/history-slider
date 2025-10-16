@@ -1,3 +1,6 @@
+# Stack 
+React + TS + Styled Components + Webpack
+
 # Requirements
 * Node v16+
 
