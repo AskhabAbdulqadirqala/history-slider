@@ -12,11 +12,21 @@ const Panel = styled.div`
   display: flex;
   flex-direction: column;
   gap: 6.67px;
+
+  @media ${({ theme }) => theme.media.desktop} {
+    bottom: 273px;
+
+    gap: 20px;
+  }
 `;
 
 const Buttons = styled.div`
   display: flex;
   gap: 8.33px;
+
+  @media ${({ theme }) => theme.media.desktop} {
+    gap: 20px;
+  }
 `;
 
 interface Props {
@@ -32,6 +42,10 @@ const getFormattedNumber = (number: number) => {
 
 const SlideNumbering = styled.p`
   text-shadow: 0px 4px 4px #00000040;
+
+  @media ${({ theme }) => theme.media.desktop} {
+    font-size: 14px;
+  }
 `;
 
 export const ControlPanel: FC<Props> = ({

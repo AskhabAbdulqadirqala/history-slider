@@ -23,6 +23,11 @@ const RotatedButtonImg = styled(ButtonImg)<{
   transform: ${({ direction }) =>
     `rotate(${direction === Directions.RIGHT ? 180 : 0}deg)`};
   opacity: ${({ isDisabled }) => (isDisabled ? 0.5 : 1)};
+
+  @media ${({ theme }) => theme.media.desktop} {
+    width: 50px;
+    height: 50px;
+  }
 `;
 
 export const ControlButton: FC<ControlButtonProps> = ({

@@ -20,7 +20,8 @@ const MainYearsContainer = styled.div`
   }
 
   @media ${({ theme }) => theme.media.desktop} {
-    font-size: 13vw;
+    justify-content: space-around;
+    font-size: 16vw;
   }
 
   & > :last-child {

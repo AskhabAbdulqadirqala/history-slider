@@ -17,6 +17,10 @@ const Wrapper = styled.div`
   flex-direction: column;
   width: 100%;
   gap: 20px;
+
+  @media ${({ theme }) => theme.media.desktop} {
+    bottom: 60px;
+  }
 `;
 
 const SlideCard = styled.div`
@@ -35,6 +39,8 @@ const SlideDescription = styled.p`
   text-shadow: 0px 4px 4px #00000040;
 
   @media ${({ theme }) => theme.media.desktop} {
+    max-height: 150px;
+
     text-shadow: unset;
   }
 `;
@@ -51,13 +57,6 @@ const SliderContainer = styled.div`
     .swiper-slide {
       width: 300px;
     }
-
-    .swiper-button-prev,
-    .swiper-button-next {
-      &:not(.swiper-button-disabled) {
-        display: flex;
-      }
-    }
   }
 `;
 
@@ -66,6 +65,10 @@ const Title = styled.h2`
 
   font-weight: bold;
   border-bottom: 1px solid #c7cdd9;
+
+  @media ${({ theme }) => theme.media.desktop} {
+    display: none;
+  }
 `;
 
 interface Props extends Slide {
@@ -88,11 +91,10 @@ export const InnerSwiper: FC<Props> = ({ title, slides, ref }) => {
               spaceBetween: 15,
             },
             768: {
-              slidesPerView: 2.2,
+              slidesPerView: 3,
               spaceBetween: 20,
             },
             1024: {
-              slidesPerView: 3,
               spaceBetween: 25,
             },
             1440: {

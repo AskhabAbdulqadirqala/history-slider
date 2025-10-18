@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 import { useKey } from 'react-use';
 import _ from 'lodash';
-import styled from 'styled-components';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import type { Swiper as SwiperType } from 'swiper';
 
 import { Container } from '@components/Container';
+import { MainTitle } from '@components/MainTitle';
 import { MainSwiper } from '@components/MainSwiper';
 import { InnerSwiper } from '@components/InnerSlider';
 import { MobileControlPoints } from '@components/MobileControlPoints';
@@ -15,10 +15,6 @@ import { ControlPanel } from '@components/ControlPanel';
 import { useAnimatedSwipe } from '@hooks/useAnimatedSwipe';
 
 import { config } from '@/config/config';
-
-const Title = styled.h1`
-  width: fit-content;
-`;
 
 export const HistorySlider: React.FC = () => {
   const [currentSlideIndex, setCurrentSlideIndex] = useState(0);
@@ -41,11 +37,11 @@ export const HistorySlider: React.FC = () => {
 
   return (
     <Container>
-      <Title>
+      <MainTitle>
         Исторические
         <br />
         даты
-      </Title>
+      </MainTitle>
       <MainSwiper
         mainSwiperRef={mainSwiperRef}
         onSlideChange={handleSlideChange}

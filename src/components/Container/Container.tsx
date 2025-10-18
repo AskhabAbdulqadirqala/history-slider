@@ -25,6 +25,9 @@ const Wrapper = styled.div`
   }
 
   @media ${({ theme }) => theme.media.desktop} {
+    height: 1080px;
+    padding-top: 170px;
+    margin-left: 61px;
     font-size: 20px;
   }
 
