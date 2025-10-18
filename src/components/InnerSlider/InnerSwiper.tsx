@@ -21,6 +21,10 @@ const Wrapper = styled.div`
   @media ${({ theme }) => theme.media.desktop} {
     bottom: 60px;
   }
+
+  @media ${({ theme }) => theme.media.largeDesktop} {
+    bottom: 77px;
+  }
 `;
 
 const SlideCard = styled.div`
@@ -30,6 +34,8 @@ const SlideCard = styled.div`
 `;
 
 const Year = styled.h3`
+  font-family: Bebas Neue;
+  line-height: 120%;
   color: ${({ theme }) => theme.colors.secondary};
 `;
 
@@ -53,9 +59,43 @@ const SliderContainer = styled.div`
     display: none;
   }
 
-  @media (min-width: 1024px) {
+  @media ${({ theme }) => theme.media.desktop} {
+    max-width: 82%;
+
+    .swiper {
+      position: unset;
+    }
+
     .swiper-slide {
       width: 300px;
+    }
+
+    .swiper-button-prev,
+    .swiper-button-next {
+      display: block;
+      width: 40px;
+      height: 40px;
+      justify-items: center;
+      place-content: center;
+
+      background: #ffffff;
+      box-shadow: 0px 0px 15px rgba(56, 119, 238, 0.1);
+      border-radius: 50%;
+      stroke: ${({ theme }) => theme.colors.secondary};
+      stroke-width: 2px;
+
+      svg {
+        width: 5px;
+        height: 10px;
+      }
+    }
+
+    .swiper-button-next {
+      right: 40px;
+    }
+
+    .swiper-button-prev {
+      left: -60px;
     }
   }
 `;
@@ -99,7 +139,7 @@ export const InnerSwiper: FC<Props> = ({ title, slides, ref }) => {
             },
             1440: {
               slidesPerView: 3,
-              spaceBetween: 30,
+              spaceBetween: 80,
             },
           }}
         >

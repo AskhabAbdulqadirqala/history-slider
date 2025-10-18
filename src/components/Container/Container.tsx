@@ -5,6 +5,8 @@ import { ThemeProvider } from 'styled-components';
 import { GlobalStyles } from '@styles/GlobalStyles';
 import { baseTheme } from '@styles/theme';
 
+import { DesktopBackground } from '@components/DesktopBackground';
+
 const Wrapper = styled.div`
   position: relative;
 
@@ -26,9 +28,20 @@ const Wrapper = styled.div`
 
   @media ${({ theme }) => theme.media.desktop} {
     height: 1080px;
+    width: 944px;
     padding-top: 170px;
-    margin-left: 61px;
+    margin-left: 80px;
+    justify-self: center;
+
     font-size: 20px;
+  }
+
+  @media ${({ theme }) => theme.media.largeDesktop} {
+    width: 1360px;
+  }
+
+  @media ${({ theme }) => theme.media.hugeDesktop} {
+    margin-left: 240px;
   }
 
   h1 {
@@ -62,6 +75,7 @@ export const Container: FC<Props> = ({ children }) => {
     <ThemeProvider theme={baseTheme}>
       <Wrapper>
         <GlobalStyles />
+        <DesktopBackground />
         {children}
       </Wrapper>
     </ThemeProvider>

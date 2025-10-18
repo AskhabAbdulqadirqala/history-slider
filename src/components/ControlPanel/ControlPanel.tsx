@@ -18,6 +18,10 @@ const Panel = styled.div`
 
     gap: 20px;
   }
+
+  @media ${({ theme }) => theme.media.largeDesktop} {
+    bottom: 290px;
+  }
 `;
 
 const Buttons = styled.div`

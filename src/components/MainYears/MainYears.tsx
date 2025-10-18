@@ -20,8 +20,35 @@ const MainYearsContainer = styled.div`
   }
 
   @media ${({ theme }) => theme.media.desktop} {
-    justify-content: space-around;
-    font-size: 16vw;
+    padding-top: 38px;
+    padding-right: 67px;
+    gap: 68px;
+    justify-self: center;
+
+    font-size: 164px;
+    line-height: 160%;
+
+    & > * {
+      width: 356px;
+
+      text-align: right;
+    }
+
+    & > :last-child {
+      text-align: left;
+    }
+  }
+
+  @media ${({ theme }) => theme.media.largeDesktop} {
+    padding-top: 16px;
+    padding-right: 118px;
+    gap: 93px;
+
+    font-size: 200px;
+
+    & > * {
+      width: 437px;
+    }
   }
 
   & > :last-child {
@@ -42,21 +69,19 @@ interface Props {
 export const MainYears: FC<Props> = ({ startYears, endYears }) => {
   return (
     <MainYearsContainer>
-      <>
-        {_.map([startYears, endYears], ({ prev: prevYear, new: newYear }) =>
-          _.isNumber(prevYear) ? (
-            <CountUp
-              separator=''
-              start={prevYear}
-              end={newYear}
-              duration={0.5}
-              key={newYear}
-            />
-          ) : (
-            <span key={newYear}>{newYear}</span>
-          ),
-        )}
-      </>
+      {_.map([startYears, endYears], ({ prev: prevYear, new: newYear }) =>
+        _.isNumber(prevYear) ? (
+          <CountUp
+            separator=''
+            start={prevYear}
+            end={newYear}
+            duration={0.5}
+            key={newYear}
+          />
+        ) : (
+          <span key={newYear}>{newYear}</span>
+        ),
+      )}
     </MainYearsContainer>
   );
 };

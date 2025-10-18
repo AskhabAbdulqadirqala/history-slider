@@ -11,7 +11,7 @@ const Title = styled.h1`
       content: '';
       position: absolute;
       top: 0;
-      left: -61px;
+      left: -80px;
       width: 5px;
       height: 100%;
       background: linear-gradient(180deg, #3877ee 0%, #ef5da8 100%);
