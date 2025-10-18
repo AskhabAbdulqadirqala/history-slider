@@ -15,6 +15,10 @@ const MainYearsContainer = styled.div`
   letter-spacing: -0.02em;
   color: ${({ theme }) => theme.colors.secondary};
 
+  @media ${({ theme }) => theme.media.largeMobile} {
+    font-size: 11vw;
+  }
+
   @media ${({ theme }) => theme.media.desktop} {
     font-size: 13vw;
   }
@@ -40,9 +44,15 @@ export const MainYears: FC<Props> = ({ startYears, endYears }) => {
       <>
         {_.map([startYears, endYears], ({ prev: prevYear, new: newYear }) =>
           _.isNumber(prevYear) ? (
-            <CountUp separator='' start={prevYear} end={newYear} duration={1} />
+            <CountUp
+              separator=''
+              start={prevYear}
+              end={newYear}
+              duration={0.5}
+              key={newYear}
+            />
           ) : (
-            <span>{newYear}</span>
+            <span key={newYear}>{newYear}</span>
           ),
         )}
       </>

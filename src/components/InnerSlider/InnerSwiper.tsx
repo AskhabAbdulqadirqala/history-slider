@@ -11,29 +11,36 @@ import { Slide } from '@/types/slide';
 
 const Wrapper = styled.div`
   position: absolute;
-  bottom: 141px;
+  bottom: 121px;
+
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  gap: 20px;
 `;
 
 const SlideCard = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
 `;
 
-const Year = styled.div`
+const Year = styled.h3`
+  color: ${({ theme }) => theme.colors.secondary};
 `;
 
 const SlideDescription = styled.p`
+  max-height: 90px;
+  overflow: auto;
+  text-shadow: 0px 4px 4px #00000040;
+
+  @media ${({ theme }) => theme.media.desktop} {
+    text-shadow: unset;
+  }
 `;
 
 const SliderContainer = styled.div`
   max-width: 100%;
-  margin-top: 30px;
-
-  .swiper {
-    padding: 20px 0;
-  }
-
-  .swiper-slide {
-    display: flex;
-  }
 
   .swiper-button-prev,
   .swiper-button-next {
@@ -55,19 +62,44 @@ const SliderContainer = styled.div`
 `;
 
 const Title = styled.h2`
+  padding-bottom: 10px;
+
   font-weight: bold;
+  border-bottom: 1px solid #c7cdd9;
 `;
 
-export const InnerSwiper: FC<Slide> = ({ title, slides }) => {
+interface Props extends Slide {
+  ref: React.RefObject<HTMLDivElement | null>;
+}
+
+export const InnerSwiper: FC<Props> = ({ title, slides, ref }) => {
   return (
-    <Wrapper>
+    <Wrapper ref={ref}>
       <Title>{title}</Title>
       <SliderContainer>
         <Swiper
           modules={[Navigation, Pagination]}
           spaceBetween={20}
           navigation
-          slidesPerView={2}
+          slidesPerView={'auto'}
+          breakpoints={{
+            320: {
+              slidesPerView: 1.5,
+              spaceBetween: 15,
+            },
+            768: {
+              slidesPerView: 2.2,
+              spaceBetween: 20,
+            },
+            1024: {
+              slidesPerView: 3,
+              spaceBetween: 25,
+            },
+            1440: {
+              slidesPerView: 3,
+              spaceBetween: 30,
+            },
+          }}
         >
           {slides.map((slide) => (
             <SwiperSlide key={slide.year}>

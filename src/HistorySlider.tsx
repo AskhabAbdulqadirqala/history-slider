@@ -1,16 +1,18 @@
-import React, { useRef, useState } from 'react';
+import React, { useState } from 'react';
 import { useKey } from 'react-use';
 import _ from 'lodash';
 import styled from 'styled-components';
-import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import type { Swiper as SwiperType } from 'swiper';
+
 import { Container } from '@components/Container';
-import { MainYears } from '@components/MainYears/MainYears';
+import { MainSwiper } from '@components/MainSwiper';
+import { InnerSwiper } from '@components/InnerSlider';
 import { MobileControlPoints } from '@components/MobileControlPoints';
 import { ControlPanel } from '@components/ControlPanel';
-import { InnerSwiper } from '@components/InnerSlider';
+
+import { useAnimatedSwipe } from '@hooks/useAnimatedSwipe';
 
 import { config } from '@/config/config';
 
@@ -19,31 +21,19 @@ const Title = styled.h1`
 `;
 
 export const HistorySlider: React.FC = () => {
-  const swiperRef = useRef<SwiperType>(null);
   const [currentSlideIndex, setCurrentSlideIndex] = useState(0);
-
-  const goToNextSlide = () => {
-    if (swiperRef.current) {
-      swiperRef.current.slideNext();
-    }
-  };
-
-  const goToPrevSlide = () => {
-    if (swiperRef.current) {
-      swiperRef.current.slidePrev();
-    }
-  };
-
-  const goToSlide = (index: number) => {
-    if (swiperRef.current) {
-      swiperRef.current.slideTo(index);
-    }
-  };
+  const {
+    mainSwiperRef,
+    innerSwiperRef,
+    goToSlide,
+    goToNextSlide,
+    goToPrevSlide,
+  } = useAnimatedSwipe({
+    currentSlideIndex,
+  });
 
   const handleSlideChange = (swiper: SwiperType) => {
-    const newIndex = swiper.activeIndex;
-
-    setCurrentSlideIndex(newIndex);
+    setCurrentSlideIndex(swiper.activeIndex);
   };
 
   useKey('ArrowRight', goToNextSlide);
@@ -56,40 +46,11 @@ export const HistorySlider: React.FC = () => {
         <br />
         даты
       </Title>
-
-      <Swiper
-        spaceBetween={20}
-        slidesPerView={1}
-        onSwiper={(swiper) => {
-          swiperRef.current = swiper;
-        }}
+      <MainSwiper
+        mainSwiperRef={mainSwiperRef}
         onSlideChange={handleSlideChange}
-        allowTouchMove={false}
-        speed={0}
-      >
-        {config.map(({ slides }, index) => {
-          const prevIndex = swiperRef.current?.previousIndex;
-          const prevSlides =
-            (_.isNumber(prevIndex) && config[prevIndex]?.slides) || null;
-
-          return (
-            <SwiperSlide key={index}>
-              <MainYears
-                startYears={{
-                  prev: _.first(prevSlides)?.year || null,
-                  new: slides[0].year,
-                }}
-                endYears={{
-                  prev: _.last(prevSlides)?.year || null,
-                  new: slides[slides.length - 1].year,
-                }}
-              />
-            </SwiperSlide>
-          );
-        })}
-      </Swiper>
-
-      <InnerSwiper {...config[currentSlideIndex]} />
+      />
+      <InnerSwiper {...config[currentSlideIndex]} ref={innerSwiperRef} />
 
       <ControlPanel
         currentSlide={currentSlideIndex + 1}

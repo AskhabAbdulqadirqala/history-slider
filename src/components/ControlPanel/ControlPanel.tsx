@@ -1,8 +1,9 @@
 import { FC } from 'react';
 import styled from 'styled-components';
 
+import { ControlButton } from '@components/ControlButton';
+
 import { Directions } from '@/types/directions';
-import { ControlButton } from '../ControlButton';
 
 const Panel = styled.div`
   position: absolute;

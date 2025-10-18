@@ -1,0 +1,1 @@
+export { MainSwiper } from './MainSwiper';

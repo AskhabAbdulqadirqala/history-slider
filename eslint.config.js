@@ -38,7 +38,6 @@ export default [
         'warn',
         {
           groups: [['builtin', 'external'], 'internal', ['parent', 'sibling'], 'index'],
-          'newlines-between': 'always',
         },
       ],
     },

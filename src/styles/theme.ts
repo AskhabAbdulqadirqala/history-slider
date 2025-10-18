@@ -8,7 +8,9 @@ export const baseTheme: DefaultTheme = {
     bg: '#FFFFFF',
   },
   media: {
+    largeMobile: '(min-width: 500px)',
     tablet: '(min-width: 768px)',
+    largeTablet: '(min-width: 900px)',
     desktop: '(min-width: 1024px)',
   },
 };
@@ -22,7 +24,9 @@ declare module 'styled-components' {
       tertiary: string;
     };
     media: {
+      largeMobile: string;
       tablet: string;
+      largeTablet: string;
       desktop: string;
     };
   }

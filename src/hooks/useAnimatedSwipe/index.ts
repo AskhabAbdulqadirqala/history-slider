@@ -1,0 +1,1 @@
+export { useAnimatedSwipe } from './useAnimatedSwipe';

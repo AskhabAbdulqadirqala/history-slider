@@ -20,6 +20,10 @@ const Wrapper = styled.div`
   background-color: ${({ theme }) => theme.colors.bg};
   color: ${({ theme }) => theme.colors.primary};
 
+  @media ${({ theme }) => theme.media.tablet} {
+    height: 748px;
+  }
+
   @media ${({ theme }) => theme.media.desktop} {
     font-size: 20px;
   }
