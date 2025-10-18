@@ -7,26 +7,13 @@ export const GlobalStyles = createGlobalStyle`
     padding: 0;
   }
 
-  html {
-    font-size: 14px;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    scroll-behavior: smooth;
-  }
-
-  body {
-    font-family: "PT Sans";
-    background-color: #FFFFFF;
-    color: #42567A;
-    line-height: 145%;
-  }
-
   a {
     color: inherit;
     text-decoration: none;
   }
 
-  ul, ol {
+  ul,
+  ol {
     list-style: none;
   }
 
@@ -37,12 +24,19 @@ export const GlobalStyles = createGlobalStyle`
     border: none;
   }
 
-  input, textarea, button, select {
+  input,
+  textarea,
+  button,
+  select {
     font: inherit;
     color: inherit;
   }
 
-  img, picture, video, canvas, svg {
+  img,
+  picture,
+  video,
+  canvas,
+  svg {
     display: block;
     max-width: 100%;
   }

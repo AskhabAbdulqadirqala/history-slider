@@ -1,0 +1,1 @@
+export { InnerSwiper } from './InnerSwiper';
