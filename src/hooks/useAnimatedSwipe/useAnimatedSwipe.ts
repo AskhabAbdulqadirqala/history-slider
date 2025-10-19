@@ -5,18 +5,13 @@ import type { Swiper as SwiperType } from 'swiper';
 import { SlideMovement } from '@/types/slide';
 import { config } from '@/config/config';
 
-interface Props {
-  currentSlideIndex: number;
-  setNavCircleActiveIndex: (slideIndex: number) => void;
-}
-
 /**
  * Хук для анимированных свайпов глобального и внутреннего слайдеров.
  */
-export const useAnimatedSwipe = ({
-  currentSlideIndex,
-  setNavCircleActiveIndex,
-}: Props) => {
+export const useAnimatedSwipe = () => {
+  const [currentSlideIndex, setCurrentSlideIndex] = useState(0);
+  const [navCircleActiveIndex, setNavCircleActiveIndex] = useState(0);
+
   const [isAnimating, setIsAnimating] = useState(false);
   const [circleAnimationAngle, setCircleAnimationAngle] = useState<
     number | null
@@ -207,5 +202,8 @@ export const useAnimatedSwipe = ({
     mainSwiperRef,
     navCircleRef,
     navDotRefs,
+    currentSlideIndex,
+    navCircleActiveIndex,
+    setCurrentSlideIndex,
   };
 };

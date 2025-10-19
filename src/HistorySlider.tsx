@@ -19,22 +19,19 @@ import { useAnimatedSwipe } from '@hooks/useAnimatedSwipe';
 import { config } from '@/config/config';
 
 export const HistorySlider: React.FC = () => {
-  const [currentSlideIndex, setCurrentSlideIndex] = useState(0);
-  const [navCircleActiveIndex, setNavCircleActiveIndex] = useState(0);
-
   const {
     mainSwiperRef,
     innerSwiperRef,
     navCircleRef,
     navDotRefs,
+    navCircleActiveIndex,
+    currentSlideIndex,
+    setCurrentSlideIndex,
     goToSlide,
     goToNextSlide,
     goToPrevSlide,
     circleAnimationAngle,
-  } = useAnimatedSwipe({
-    currentSlideIndex,
-    setNavCircleActiveIndex,
-  });
+  } = useAnimatedSwipe();
 
   const handleSlideChange = (swiper: SwiperType) => {
     setCurrentSlideIndex(swiper.activeIndex);
