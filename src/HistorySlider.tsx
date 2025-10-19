@@ -12,6 +12,7 @@ import { MainSwiper } from '@components/MainSwiper';
 import { InnerSwiper } from '@components/InnerSlider';
 import { MobileControlPoints } from '@components/MobileControlPoints';
 import { ControlPanel } from '@components/ControlPanel';
+import { NavCircle } from '@components/NavCircle';
 
 import { useAnimatedSwipe } from '@hooks/useAnimatedSwipe';
 
@@ -44,13 +45,15 @@ export const HistorySlider: React.FC = () => {
 
   return (
     <Container>
-      <DesktopBackground
-        onDotClick={goToSlide}
-        currentSlideIndex={navCircleActiveIndex}
-        navCircleRef={navCircleRef}
-        navDotRefs={navDotRefs}
-        circleAnimationAngle={circleAnimationAngle}
-      />
+      <DesktopBackground>
+        <NavCircle
+          ref={navCircleRef}
+          onDotClick={goToSlide}
+          currentSlideIndex={navCircleActiveIndex}
+          navDotRefs={navDotRefs}
+          circleAnimationAngle={circleAnimationAngle}
+        />
+      </DesktopBackground>
       <MainTitle>
         Исторические
         <br />
