@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import { FC, ReactNode } from 'react';
 import styled from 'styled-components';
 
 const Title = styled.h1`
@@ -20,6 +20,12 @@ const Title = styled.h1`
   }
 `;
 
-export const MainTitle: FC<{ children: React.ReactNode }> = ({ children }) => {
+interface Props {
+  children: ReactNode;
+}
+
+export const MainTitle: FC<Props> = (props) => {
+  const { children } = props;
+
   return <Title>{children}</Title>;
 };

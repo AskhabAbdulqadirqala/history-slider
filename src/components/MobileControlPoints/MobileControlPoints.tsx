@@ -29,11 +29,9 @@ interface Props {
   onControlClick: (control: number) => void;
 }
 
-export const MobileControlPoints: FC<Props> = ({
-  controls,
-  activeControl,
-  onControlClick,
-}) => {
+export const MobileControlPoints: FC<Props> = (props) => {
+  const { controls, activeControl, onControlClick } = props;
+
   return (
     <Wrapper>
       {controls.map((control) => (

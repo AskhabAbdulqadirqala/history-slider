@@ -45,7 +45,9 @@ interface Props {
   children: ReactNode;
 }
 
-export const DesktopBackground: FC<Props> = ({ children }) => {
+export const DesktopBackground: FC<Props> = (props) => {
+  const { children } = props;
+
   return (
     <Background>
       <VerticalLine />

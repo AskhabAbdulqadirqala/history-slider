@@ -116,7 +116,9 @@ interface Props extends Slide {
   ref: React.RefObject<HTMLDivElement | null>;
 }
 
-export const InnerSwiper: FC<Props> = ({ title, slides, ref }) => {
+export const InnerSwiper: FC<Props> = (props) => {
+  const { title, slides, ref } = props;
+
   return (
     <Wrapper ref={ref}>
       <Title>{title}</Title>

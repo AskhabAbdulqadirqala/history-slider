@@ -66,7 +66,9 @@ interface Props {
   endYears: Years;
 }
 
-export const MainYears: FC<Props> = ({ startYears, endYears }) => {
+export const MainYears: FC<Props> = (props) => {
+  const { startYears, endYears } = props;
+
   return (
     <MainYearsContainer>
       {_.map([startYears, endYears], ({ prev: prevYear, new: newYear }) =>

@@ -43,11 +43,9 @@ const RotatedButtonImg = styled(ButtonImg)<{
   }
 `;
 
-export const ControlButton: FC<ControlButtonProps> = ({
-  direction,
-  onClick,
-  isDisabled,
-}) => {
+export const ControlButton: FC<ControlButtonProps> = (props) => {
+  const { direction, isDisabled, onClick } = props;
+
   return (
     <Button onClick={onClick}>
       <RotatedButtonImg direction={direction} isDisabled={isDisabled} />

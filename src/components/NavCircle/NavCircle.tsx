@@ -103,13 +103,15 @@ interface Props {
   circleAnimationAngle: number | null;
 }
 
-export const NavCircle: FC<Props> = ({
-  onDotClick,
-  currentSlideIndex,
-  ref,
-  navDotRefs,
-  circleAnimationAngle,
-}) => {
+export const NavCircle: FC<Props> = (props) => {
+  const {
+    onDotClick,
+    currentSlideIndex,
+    ref,
+    navDotRefs,
+    circleAnimationAngle,
+  } = props;
+
   const dotsCount = config.length;
   const dotsRange = _.range(dotsCount);
   const dotsArray = dotsRange

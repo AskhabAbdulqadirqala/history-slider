@@ -67,7 +67,9 @@ interface Props {
   children: React.ReactNode;
 }
 
-export const Container: FC<Props> = ({ children }) => {
+export const Container: FC<Props> = (props) => {
+  const { children } = props;
+
   return (
     <ThemeProvider theme={baseTheme}>
       <Wrapper>

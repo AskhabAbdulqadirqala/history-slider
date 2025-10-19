@@ -33,17 +33,6 @@ const Buttons = styled.div`
   }
 `;
 
-interface Props {
-  currentSlide: number;
-  lastSlide: number;
-  onPrevClick: () => void;
-  onNextClick: () => void;
-}
-
-const getFormattedNumber = (number: number) => {
-  return String(number).padStart(2, '0');
-};
-
 const SlideNumbering = styled.p`
   text-shadow: 0px 4px 4px #00000040;
 
@@ -52,12 +41,20 @@ const SlideNumbering = styled.p`
   }
 `;
 
-export const ControlPanel: FC<Props> = ({
-  currentSlide,
-  lastSlide,
-  onPrevClick,
-  onNextClick,
-}) => {
+const getFormattedNumber = (number: number) => {
+  return String(number).padStart(2, '0');
+};
+
+interface Props {
+  currentSlide: number;
+  lastSlide: number;
+  onPrevClick: () => void;
+  onNextClick: () => void;
+}
+
+export const ControlPanel: FC<Props> = (props) => {
+  const { currentSlide, lastSlide, onPrevClick, onNextClick } = props;
+
   return (
     <Panel>
       <SlideNumbering>
