@@ -13,6 +13,19 @@ interface ControlButtonProps extends RotatedButtonProps {
   onClick: () => void;
 }
 
+const Button = styled.button`
+  transition: transform 0.1s ease-in-out;
+
+  &:hover {
+    background-color: #ebebebff;
+    border-radius: 50%;
+  }
+
+  &:active {
+    transform: translateY(1.5px);
+  }
+`;
+
 const RotatedButtonImg = styled(ButtonImg)<{
   direction?: Directions;
   isDisabled: boolean;
@@ -36,8 +49,8 @@ export const ControlButton: FC<ControlButtonProps> = ({
   isDisabled,
 }) => {
   return (
-    <button onClick={onClick}>
+    <Button onClick={onClick}>
       <RotatedButtonImg direction={direction} isDisabled={isDisabled} />
-    </button>
+    </Button>
   );
 };
