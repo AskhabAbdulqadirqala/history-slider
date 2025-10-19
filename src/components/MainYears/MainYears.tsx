@@ -23,7 +23,7 @@ const MainYearsContainer = styled.div`
     padding-top: 38px;
     padding-right: 67px;
     gap: 68px;
-    justify-self: center;
+    justify-content: center;
 
     font-size: 164px;
     line-height: 160%;

@@ -151,9 +151,9 @@ export const useAnimatedSwipe = ({
     setIsAnimating(true);
 
     try {
+      await hideSwiper();
       await Promise.all([
         animateNavCircle(direction, targetIndex),
-        hideSwiper(),
         slideAction(),
       ]);
       await showSwiper();

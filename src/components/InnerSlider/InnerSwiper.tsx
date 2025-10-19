@@ -84,9 +84,10 @@ const SliderContainer = styled.div`
       stroke: ${({ theme }) => theme.colors.secondary};
       stroke-width: 2px;
 
-      svg {
+      .swiper-navigation-icon {
         width: 5px;
         height: 10px;
+        margin: auto;
       }
     }
 

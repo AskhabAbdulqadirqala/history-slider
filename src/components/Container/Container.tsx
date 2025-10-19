@@ -28,9 +28,8 @@ const Wrapper = styled.div`
     height: 1080px;
     width: 944px;
     padding-top: 170px;
-    margin-left: 80px;
-    justify-self: center;
-
+    margin-left: clamp(80px, 7vw, 240px);
+    transition: margin 0.1s ease-in-out;
     font-size: 20px;
   }
 
