@@ -5,8 +5,6 @@ import { ThemeProvider } from 'styled-components';
 import { GlobalStyles } from '@styles/GlobalStyles';
 import { baseTheme } from '@styles/theme';
 
-import { DesktopBackground } from '@components/DesktopBackground';
-
 const Wrapper = styled.div`
   position: relative;
 
@@ -75,7 +73,6 @@ export const Container: FC<Props> = ({ children }) => {
     <ThemeProvider theme={baseTheme}>
       <Wrapper>
         <GlobalStyles />
-        <DesktopBackground />
         {children}
       </Wrapper>
     </ThemeProvider>

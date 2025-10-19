@@ -6,6 +6,7 @@ import 'swiper/css/navigation';
 import type { Swiper as SwiperType } from 'swiper';
 
 import { Container } from '@components/Container';
+import { DesktopBackground } from '@components/DesktopBackground';
 import { MainTitle } from '@components/MainTitle';
 import { MainSwiper } from '@components/MainSwiper';
 import { InnerSwiper } from '@components/InnerSlider';
@@ -21,9 +22,12 @@ export const HistorySlider: React.FC = () => {
   const {
     mainSwiperRef,
     innerSwiperRef,
+    navCircleRef,
+    navDotRefs,
     goToSlide,
     goToNextSlide,
     goToPrevSlide,
+    circleAnimationAngle,
   } = useAnimatedSwipe({
     currentSlideIndex,
   });
@@ -37,6 +41,13 @@ export const HistorySlider: React.FC = () => {
 
   return (
     <Container>
+      <DesktopBackground
+        onDotClick={goToSlide}
+        currentSlideIndex={currentSlideIndex}
+        navCircleRef={navCircleRef}
+        navDotRefs={navDotRefs}
+        circleAnimationAngle={circleAnimationAngle}
+      />
       <MainTitle>
         Исторические
         <br />
