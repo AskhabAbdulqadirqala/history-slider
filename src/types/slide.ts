@@ -5,3 +5,9 @@ export interface Slide {
     description: string;
   }[];
 }
+
+export enum SlideMovement {
+  NEXT = 'next',
+  PREV = 'prev',
+  TO = 'to',
+}

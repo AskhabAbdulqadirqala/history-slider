@@ -19,6 +19,8 @@ import { config } from '@/config/config';
 
 export const HistorySlider: React.FC = () => {
   const [currentSlideIndex, setCurrentSlideIndex] = useState(0);
+  const [navCircleActiveIndex, setNavCircleActiveIndex] = useState(0);
+
   const {
     mainSwiperRef,
     innerSwiperRef,
@@ -30,6 +32,7 @@ export const HistorySlider: React.FC = () => {
     circleAnimationAngle,
   } = useAnimatedSwipe({
     currentSlideIndex,
+    setNavCircleActiveIndex,
   });
 
   const handleSlideChange = (swiper: SwiperType) => {
@@ -43,7 +46,7 @@ export const HistorySlider: React.FC = () => {
     <Container>
       <DesktopBackground
         onDotClick={goToSlide}
-        currentSlideIndex={currentSlideIndex}
+        currentSlideIndex={navCircleActiveIndex}
         navCircleRef={navCircleRef}
         navDotRefs={navDotRefs}
         circleAnimationAngle={circleAnimationAngle}

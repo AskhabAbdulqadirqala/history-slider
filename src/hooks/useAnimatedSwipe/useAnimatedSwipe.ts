@@ -2,16 +2,25 @@ import { useEffect, useRef, useState } from 'react';
 import { gsap } from 'gsap';
 import type { Swiper as SwiperType } from 'swiper';
 
+import { SlideMovement } from '@/types/slide';
+import { config } from '@/config/config';
+
 interface Props {
   currentSlideIndex: number;
+  setNavCircleActiveIndex: (slideIndex: number) => void;
 }
 
 /**
  * Хук для анимированных свайпов глобального и внутреннего слайдеров.
  */
-export const useAnimatedSwipe = ({ currentSlideIndex }: Props) => {
+export const useAnimatedSwipe = ({
+  currentSlideIndex,
+  setNavCircleActiveIndex,
+}: Props) => {
   const [isAnimating, setIsAnimating] = useState(false);
-  const [circleAnimationAngle, setCircleAnimationAngle] = useState<number | null>(null);
+  const [circleAnimationAngle, setCircleAnimationAngle] = useState<
+    number | null
+  >(null);
 
   const mainSwiperRef = useRef<SwiperType>(null);
   const innerSwiperRef = useRef<HTMLDivElement>(null);
@@ -59,7 +68,10 @@ export const useAnimatedSwipe = ({ currentSlideIndex }: Props) => {
     });
   };
 
-  const animateNavCircle = (direction: 'next' | 'prev' | 'to', targetIndex: number): Promise<void> => {
+  const animateNavCircle = (
+    direction: SlideMovement,
+    targetIndex: number,
+  ): Promise<void> => {
     return new Promise((resolve) => {
       if (
         !navCircleRef.current ||
@@ -70,22 +82,35 @@ export const useAnimatedSwipe = ({ currentSlideIndex }: Props) => {
         return;
       }
       let rotation = 0;
+      const slidesLength = config.length;
+      const anglePerSlide = 360 / slidesLength;
 
-      if (direction === 'next') {
-        rotation = -60; // Вращение по часовой стрелке
-      } else if (direction === 'prev') {
-        rotation = 60; // Вращение против часовой стрелки
-      } else if (direction === 'to' && targetIndex !== undefined) {
-        // Вычисляем угол вращения на основе разницы индексов
-        const anglePerSlide = 360 / 6; // 6 точек = 60° каждая
+      if (direction === SlideMovement.NEXT) {
+        rotation = -anglePerSlide; // Вращение по часовой стрелке
+      } else if (direction === SlideMovement.PREV) {
+        rotation = anglePerSlide; // Вращение против часовой стрелки
+      } else if (direction === SlideMovement.TO) {
         const diff = targetIndex - currentSlideIndex;
+        const halfWay = slidesLength / 2;
+
         // Корректируем для кратчайшего пути
-        const shortestDiff = diff > 3 ? diff - 6 : diff < -3 ? diff + 6 : diff;
+        const shortestDiff =
+          diff > halfWay
+            ? diff - slidesLength
+            : diff < -halfWay
+              ? diff + slidesLength
+              : diff;
         rotation = -shortestDiff * anglePerSlide;
       }
 
-      navDotRefs.current[targetIndex]?.setAttribute('data-is-animating', 'true');
-      navDotRefs.current[currentSlideIndex]?.setAttribute('data-is-animating', 'true');
+      navDotRefs.current[targetIndex]?.setAttribute(
+        'data-is-animating',
+        'true',
+      );
+      navDotRefs.current[currentSlideIndex]?.setAttribute(
+        'data-is-animating',
+        'true',
+      );
 
       setCircleAnimationAngle(rotation);
 
@@ -99,8 +124,13 @@ export const useAnimatedSwipe = ({ currentSlideIndex }: Props) => {
             duration: 0,
             onComplete: () => {
               setCircleAnimationAngle(null);
-              navDotRefs.current[targetIndex]?.removeAttribute('data-is-animating');
-              navDotRefs.current[currentSlideIndex]?.removeAttribute('data-is-animating');
+              navDotRefs.current[targetIndex]?.removeAttribute(
+                'data-is-animating',
+              );
+              navDotRefs.current[currentSlideIndex]?.removeAttribute(
+                'data-is-animating',
+              );
+              setNavCircleActiveIndex(targetIndex);
               resolve();
             },
           });
@@ -111,7 +141,7 @@ export const useAnimatedSwipe = ({ currentSlideIndex }: Props) => {
 
   const animateChange = async (
     slideAction: () => void,
-    direction: 'next' | 'prev' | 'to' = 'next',
+    direction: SlideMovement,
     targetIndex: number,
   ) => {
     if (isAnimating) {
@@ -122,10 +152,10 @@ export const useAnimatedSwipe = ({ currentSlideIndex }: Props) => {
 
     try {
       await Promise.all([
-        hideSwiper(),
         animateNavCircle(direction, targetIndex),
+        hideSwiper(),
+        slideAction(),
       ]);
-      slideAction();
       await showSwiper();
     } finally {
       setIsAnimating(false);
@@ -134,32 +164,38 @@ export const useAnimatedSwipe = ({ currentSlideIndex }: Props) => {
 
   const goToNextSlide = () => {
     if (mainSwiperRef.current && !mainSwiperRef.current.isEnd) {
-      animateChange(() => {
-        mainSwiperRef.current?.slideNext();
-      }, 'next', currentSlideIndex + 1);
+      animateChange(
+        () => mainSwiperRef.current?.slideNext(),
+        SlideMovement.NEXT,
+        currentSlideIndex + 1,
+      );
     }
   };
 
   const goToPrevSlide = () => {
     if (mainSwiperRef.current && !mainSwiperRef.current.isBeginning) {
-      animateChange(() => {
-        mainSwiperRef.current?.slidePrev();
-      }, 'prev', currentSlideIndex - 1);
+      animateChange(
+        () => mainSwiperRef.current?.slidePrev(),
+        SlideMovement.PREV,
+        currentSlideIndex - 1,
+      );
     }
   };
 
   const goToSlide = (index: number) => {
     if (mainSwiperRef.current && index !== currentSlideIndex) {
-      animateChange(() => {
-        mainSwiperRef.current?.slideTo(index);
-      }, 'to', index);
+      animateChange(
+        () => {
+          mainSwiperRef.current?.slideTo(index);
+        },
+        SlideMovement.TO,
+        index,
+      );
     }
   };
 
   useEffect(() => {
-    if (innerSwiperRef.current) {
-      showSwiper();
-    }
+    showSwiper();
   }, []);
 
   return {
