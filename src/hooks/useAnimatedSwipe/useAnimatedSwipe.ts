@@ -61,8 +61,12 @@ export const useAnimatedSwipe = ({ currentSlideIndex }: Props) => {
 
   const animateNavCircle = (direction: 'next' | 'prev' | 'to', targetIndex: number): Promise<void> => {
     return new Promise((resolve) => {
-      if (!navCircleRef.current) {
+      if (
+        !navCircleRef.current ||
+        !navCircleRef.current.getBoundingClientRect().width
+      ) {
         resolve();
+
         return;
       }
       let rotation = 0;
