@@ -1,10 +1,19 @@
-# Stack 
-React + TS + Styled Components + Webpack
+# About
+History Slider - Интерактивная хронологический анимированный слайдер. Веб-приложение для интерактивного просмотра исторических событий через круговой интерфейс
 
-# Requirements
-* Node v16+
+Проект представляет хронологию исторических событий через круговой навигатор, где каждая точка на окружности соответствует определенному историческому периоду. Пользователь может плавно перемещаться между эпохами, наблюдая синхронизированные анимации интерфейса.
+
+## How it works
+
+![Interface](./about/interface.png)
+<video controls src="./about/interface.webm" title="interface"></video>
 
 # Dev
+## Stack
+React + TS + Styled Components + Webpack
+
+## Requirements
+* Node v16+
 Для локального запуска приложения нужно:
 
 1. Ввести в корне проекта:
@@ -14,7 +23,7 @@ npm run dev
 ```
 2. Открыть [localhost:3000](http://localhost:3000/)
 
-# Сборка
+## Сборка
 ```bash
 npm run build
 ```
